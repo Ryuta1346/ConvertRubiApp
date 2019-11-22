@@ -125,21 +125,27 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skr-9l-inr">
-                                            <rect key="frame" x="20" y="11" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skr-9l-inr">
+                                            <rect key="frame" x="20" y="10" width="374" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGq-OX-yaE">
-                                            <rect key="frame" x="20" y="38" width="48" height="24"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGq-OX-yaE">
+                                            <rect key="frame" x="20" y="36" width="374" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="YGq-OX-yaE" secondAttribute="trailing" constant="20" id="4w3-M1-GzW"/>
+                                        <constraint firstItem="skr-9l-inr" firstAttribute="top" secondItem="PGD-15-EiQ" secondAttribute="top" constant="10" id="6QZ-tV-QYM"/>
+                                        <constraint firstAttribute="trailing" secondItem="skr-9l-inr" secondAttribute="trailing" constant="20" id="6ld-y0-H67"/>
+                                        <constraint firstAttribute="bottom" secondItem="YGq-OX-yaE" secondAttribute="bottom" constant="10" id="7R2-4h-A6t"/>
+                                        <constraint firstItem="YGq-OX-yaE" firstAttribute="leading" secondItem="PGD-15-EiQ" secondAttribute="leading" constant="20" id="JGg-GK-6mM"/>
+                                        <constraint firstItem="skr-9l-inr" firstAttribute="leading" secondItem="PGD-15-EiQ" secondAttribute="leading" constant="20" id="Xaq-2e-G19"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
