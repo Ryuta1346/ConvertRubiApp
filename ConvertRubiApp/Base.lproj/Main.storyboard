@@ -86,6 +86,12 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="inputText" destination="sdK-5j-Mqb" id="OyV-bc-JJA"/>
+                        <outlet property="rubiText" destination="Dh1-Ws-a6M" id="x3J-ur-srX"/>
+                        <outlet property="searchtext" destination="lFm-NR-UOz" id="Dxw-9V-fL8"/>
+                        <outlet property="tableView" destination="31N-Qe-fcm" id="zdW-tu-wkD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
