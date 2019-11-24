@@ -20,13 +20,17 @@ struct RubiData: Codable {
     let converted: String
 }
 
-class ViewController: UIViewController, UISearchBarDelegate {
+// 変換前後のワードを格納する
+var convertRubiList : [(input:String, output:String)] = []
 
-    
+
+class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource {
+
     @IBOutlet weak var searchText: UISearchBar!
     @IBOutlet weak var inputText: UILabel!
     @IBOutlet weak var rubiText: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,11 +40,15 @@ class ViewController: UIViewController, UISearchBarDelegate {
         searchText.delegate = self
         //
         searchText.placeholder = "ルビをつけたいワードを入力してください"
+        
+        tableView.dataSource = self
+        
     }
 
         func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
             
-            let app_id = "app_idを登録"
+            // 外部からIDを見えないような処理をする
+            let app_id = "app_id"
             let output_type = "hiragana"
             // キーボードを閉じる
             view.endEditing(true)
@@ -79,11 +87,37 @@ class ViewController: UIViewController, UISearchBarDelegate {
                     print("json変換に失敗しました")
                     return
                 }
-                print(jsonData.converted)
+
                 self.inputText.text = inputString
                 self.rubiText.text = jsonData.converted
+                
+                let convertWord = (inputString, jsonData.converted)
+                convertRubiList.insert(convertWord, at: 0)
+                                                
+                self.tableView.reloadData()
             }
             task.resume()
         }
+    
+    // セクションの数
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    // セルの数
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return convertRubiList.count
+    }
+    
+    // セルを返す
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // セルにテキストを出力
+        let cell : ConvertRubiTableViewCell = tableView.dequeueReusableCell(withIdentifier: "convertCell", for: indexPath) as! ConvertRubiTableViewCell
+        
+        // セルに表示する値を設定
+        cell.inputCharacter!.text = convertRubiList[indexPath.row].input
+        cell.outputCharacter!.text = convertRubiList[indexPath.row].output
+        return cell
+    }
 }
 

@@ -13,6 +13,7 @@
 		32E430EF23885A30004710D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E430ED23885A30004710D9 /* Main.storyboard */; };
 		32E430F123885A30004710D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32E430F023885A30004710D9 /* Assets.xcassets */; };
 		32E430F423885A30004710D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E430F223885A30004710D9 /* LaunchScreen.storyboard */; };
+		32E43102238AD47D004710D9 /* ConvertRubiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E43101238AD47D004710D9 /* ConvertRubiTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		32E430F023885A30004710D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		32E430F323885A30004710D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		32E430F523885A30004710D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32E43101238AD47D004710D9 /* ConvertRubiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertRubiTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				32E430E723885A30004710D9 /* AppDelegate.swift */,
 				32E430E923885A30004710D9 /* SceneDelegate.swift */,
 				32E430EB23885A30004710D9 /* ViewController.swift */,
+				32E43101238AD47D004710D9 /* ConvertRubiTableViewCell.swift */,
 				32E430ED23885A30004710D9 /* Main.storyboard */,
 				32E430F023885A30004710D9 /* Assets.xcassets */,
 				32E430F223885A30004710D9 /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				32E430EC23885A30004710D9 /* ViewController.swift in Sources */,
 				32E430E823885A30004710D9 /* AppDelegate.swift in Sources */,
 				32E430EA23885A30004710D9 /* SceneDelegate.swift in Sources */,
+				32E43102238AD47D004710D9 /* ConvertRubiTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
