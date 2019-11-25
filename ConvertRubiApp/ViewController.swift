@@ -42,6 +42,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         searchText.placeholder = "ルビをつけたいワードを入力してください"
         
         tableView.dataSource = self
+        tableView.isScrollEnabled = false
         
     }
 
@@ -92,7 +93,13 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
                 self.rubiText.text = jsonData.converted
                 
                 let convertWord = (inputString, jsonData.converted)
+               
+                if convertRubiList.count < 5 {
+                    convertRubiList.insert(convertWord, at: 0)
+                } else {
+                convertRubiList.removeLast()
                 convertRubiList.insert(convertWord, at: 0)
+                }
                                                 
                 self.tableView.reloadData()
             }
@@ -103,12 +110,13 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     // セルの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return convertRubiList.count
     }
     
-    // セルを返す
+    // セルを返す(表示を5つだけにしたい)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // セルにテキストを出力
@@ -117,7 +125,9 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         // セルに表示する値を設定
         cell.inputCharacter!.text = convertRubiList[indexPath.row].input
         cell.outputCharacter!.text = convertRubiList[indexPath.row].output
+                
         return cell
     }
+    
 }
 
