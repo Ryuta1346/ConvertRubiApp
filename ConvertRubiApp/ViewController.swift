@@ -30,6 +30,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     @IBOutlet weak var inputText: UILabel!
     @IBOutlet weak var rubiText: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var registerButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -42,6 +43,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         searchText.placeholder = "ルビをつけたいワードを入力してください"
         
         tableView.dataSource = self
+        
+        // TableViewのスクロールをオフに
         tableView.isScrollEnabled = false
         
     }
@@ -102,9 +105,21 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
                 }
                                                 
                 self.tableView.reloadData()
+                
+                // 引数のwithDurationでアニメーションの処理時間を指定
+                // Buttonなので即表示させる
+                UIButton.animate(withDuration: 0.0, animations: {
+                    // アルファ値を1.0に変化させる(初期値はStoryboardで0.0に設定済み)
+                    self.registerButton.alpha = 1.0
+                })
             }
             task.resume()
         }
+    
+    // TableViewにタイトル表示
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "変換履歴(5件)"
+    }
     
     // セクションの数
     func numberOfSections(in tableView: UITableView) -> Int {

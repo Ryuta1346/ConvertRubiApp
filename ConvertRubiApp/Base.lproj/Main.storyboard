@@ -31,7 +31,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLy-hz-J6P">
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLy-hz-J6P">
                                 <rect key="frame" x="100" y="300" width="214" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="リスト登録"/>
@@ -104,6 +104,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="inputText" destination="sdK-5j-Mqb" id="OyV-bc-JJA"/>
+                        <outlet property="registerButton" destination="iLy-hz-J6P" id="l1p-kD-ylB"/>
                         <outlet property="rubiText" destination="Dh1-Ws-a6M" id="x3J-ur-srX"/>
                         <outlet property="searchText" destination="lFm-NR-UOz" id="GMD-Yl-08N"/>
                         <outlet property="tableView" destination="31N-Qe-fcm" id="zdW-tu-wkD"/>
