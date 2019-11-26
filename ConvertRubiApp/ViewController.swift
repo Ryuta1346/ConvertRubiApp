@@ -6,6 +6,7 @@
 //  Copyright © 2019 田代龍太. All rights reserved.
 //
 
+
 import UIKit
 
 struct WordData: Codable {
@@ -20,9 +21,11 @@ struct RubiData: Codable {
     let converted: String
 }
 
-// 変換前後のワードを格納する
+// 変換履歴用のデータを格納する
 var convertRubiList : [(input:String, output:String)] = []
 
+// 登録リスト用のデータを格納する
+var registerList : [(input:String, output:String)] = []
 
 class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource {
 
@@ -39,7 +42,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         
         // SearchBarのdelegate通知先設定
         searchText.delegate = self
-        //
+        
+        // プレースホルダーを設定
         searchText.placeholder = "ルビをつけたいワードを入力してください"
         
         tableView.dataSource = self
@@ -49,8 +53,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         
     }
 
+        // サーチバーがクリックされた時の処理
         func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-            
             // 外部からIDを見えないような処理をする
             let app_id = "app_id"
             let output_type = "hiragana"
@@ -100,8 +104,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
                 if convertRubiList.count < 5 {
                     convertRubiList.insert(convertWord, at: 0)
                 } else {
-                convertRubiList.removeLast()
-                convertRubiList.insert(convertWord, at: 0)
+                    convertRubiList.removeLast()
+                    convertRubiList.insert(convertWord, at: 0)
                 }
                                                 
                 self.tableView.reloadData()
