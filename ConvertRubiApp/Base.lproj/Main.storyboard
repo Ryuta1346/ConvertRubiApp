@@ -98,7 +98,7 @@
                     <navigationItem key="navigationItem" id="pV3-qZ-QYe">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="bookmarks" id="qLs-ey-Z6Q">
                             <connections>
-                                <segue destination="yac-oN-Gkj" kind="show" id="6Lm-jf-0Re"/>
+                                <segue destination="yac-oN-Gkj" kind="show" identifier="toListTableView" id="6Lm-jf-0Re"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -123,7 +123,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="70" id="rwO-zP-G7T">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="listCell" rowHeight="70" id="rwO-zP-G7T" customClass="ListTableViewCell" customModule="ConvertRubiApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rwO-zP-G7T" id="PGD-15-EiQ">
@@ -152,6 +152,10 @@
                                         <constraint firstItem="skr-9l-inr" firstAttribute="leading" secondItem="PGD-15-EiQ" secondAttribute="leading" constant="20" id="Xaq-2e-G19"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="inputCharacterInList" destination="skr-9l-inr" id="X9a-j9-qzr"/>
+                                    <outlet property="outputCharacterInList" destination="YGq-OX-yaE" id="TIF-e6-tvq"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

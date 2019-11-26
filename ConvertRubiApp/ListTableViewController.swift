@@ -9,6 +9,8 @@
 import UIKit
 
 class ListTableViewController: UITableViewController {
+    
+    var list = registrationList
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +26,22 @@ class ListTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return list.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? ListTableViewCell
+        
+        // セルに表示する値を設定
+        cell?.inputCharacterInList!.text = registrationList[indexPath.row].input
+        cell?.outputCharacterInList!.text = registrationList[indexPath.row].output
+                
+        return UITableViewCell()
     }
 
     /*

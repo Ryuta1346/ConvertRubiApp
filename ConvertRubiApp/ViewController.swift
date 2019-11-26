@@ -156,10 +156,11 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     
     // 画面遷移時の処理
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-        // 次の画面を取り出す
-        _ = segue.destination as! ListTableViewController
+        if segue.identifier == "toListTableView" {
+            // 次の画面を取り出す
+            let listTableView = segue.destination as! ListTableViewController
         
+        }
     }
-    
 }
 
