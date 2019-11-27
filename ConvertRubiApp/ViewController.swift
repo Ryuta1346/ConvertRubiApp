@@ -123,6 +123,9 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
                 self.registerButton.alpha = 1.0
             })
         }
+        
+        
+        
         task.resume()
     }
 
@@ -162,5 +165,14 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         
         }
     }
+     
+    @IBAction func tapRegistrationButton(_ sender: Any) {
+        
+        let wordSet = (convertRubiList[0])
+        registrationList.insert(wordSet, at: 0)
+        print(registrationList)
+
+    }
+    
 }
 
