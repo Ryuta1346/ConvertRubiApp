@@ -43,6 +43,23 @@ class ListTableViewController: UITableViewController {
                 
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            // リストから削除
+            registrationList.remove(at: indexPath.row)
+            //セルを削除
+            tableViewOnList.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
+            
+            do {
+                let data: Data = try NSKeyedArchiver.archivedData(withRootObject: registrationList, requiringSecureCoding: true)
+                
+            } catch {
+                
+            }
+        }
+    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
