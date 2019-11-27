@@ -10,8 +10,8 @@ import UIKit
 
 class ListTableViewController: UITableViewController {
     
-    var list = registrationList
-
+    @IBOutlet var tableViewOnList: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,17 +31,17 @@ class ListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return list.count
+        return registrationList.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? ListTableViewCell
+        let cell : ListTableViewCell = tableViewOnList.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as! ListTableViewCell
         
         // セルに表示する値を設定
-        cell?.inputCharacterInList!.text = registrationList[indexPath.row].input
-        cell?.outputCharacterInList!.text = registrationList[indexPath.row].output
+        cell.inputCharacterInList!.text = registrationList[indexPath.row].input
+        cell.outputCharacterInList!.text = registrationList[indexPath.row].output
                 
-        return UITableViewCell()
+        return cell
     }
 
     /*
