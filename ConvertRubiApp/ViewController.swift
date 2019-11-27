@@ -50,10 +50,20 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         
         // TableViewのスクロールをオフに
         tableView.isScrollEnabled = false
-        
     }
 
-    
+    // 編集が開始されたら、キャンセルボタンを有効にする
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.showsCancelButton = true
+        return true
+    }
+
+    // キャンセルボタンが押されたらキャンセルボタンを無効にしてフォーカスを外す
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.resignFirstResponder()
+    }
+
     // サーチバーがクリックされた時の処理
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         // 外部からIDを見えないような処理をする
