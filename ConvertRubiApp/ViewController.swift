@@ -34,6 +34,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     @IBOutlet weak var rubiText: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var registrationNotice: UILabel!
     
     
     override func viewDidLoad() {
@@ -50,11 +51,16 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         
         // TableViewのスクロールをオフに
         tableView.isScrollEnabled = false
+        
+        registerButton.setTitle("リスト登録", for: .normal)
     }
 
     // 編集が開始されたら、キャンセルボタンを有効にする
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.showsCancelButton = true
+        registerButton.setTitle("リスト登録", for: .normal)
+        registerButton.setTitleColor(UIColor.blue, for: .normal)
+        registerButton.isEnabled = true
         return true
     }
 
@@ -134,8 +140,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
             })
         }
         
-        
-        
         task.resume()
     }
 
@@ -171,18 +175,22 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         if segue.identifier == "toListTableView" {
             // 次の画面を取り出す
-            let listTableView = segue.destination as! ListTableViewController
+            _ = segue.destination as! ListTableViewController
         
         }
     }
      
     @IBAction func tapRegistrationButton(_ sender: Any) {
         
+        // 変換したワードをregistrationListに登録
         let wordSet = (convertRubiList[0])
         registrationList.insert(wordSet, at: 0)
         print(registrationList)
+        
+        registerButton.setTitle("登録しました", for: .normal)
+        registerButton.setTitleColor(UIColor.red, for: .normal)
+        registerButton.isEnabled = false
 
-    }
-    
+        }
 }
 
