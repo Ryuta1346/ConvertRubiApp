@@ -17,8 +17,9 @@ class ListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // UserDefaultsに保存していた値の読み込み処理
         let userDefaults = UserDefaults.standard
+        
+        // 保存しておいたデータの読み込み処理
         if let loadList = userDefaults.object(forKey: "list") as? [[String: Any]] {
             // 辞書の配列をタプルの配列へ変換
             let wordSet = loadList.map { (input: $0["input"] as! String, output: $0["output"] as! String)}

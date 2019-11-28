@@ -9,12 +9,14 @@
 
 import UIKit
 
+// リクエストのデータ形式
 struct WordData: Codable {
     let app_id:String
     let sentence: String
     let output_type: String
 }
 
+// レスポンスのデータ形式
 struct RubiData: Codable {
     let request_id: String
     let output_type: String
@@ -34,7 +36,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     @IBOutlet weak var rubiText: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var registerButton: UIButton!
-    @IBOutlet weak var registrationNotice: UILabel!
     
     
     override func viewDidLoad() {
@@ -58,6 +59,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     // 編集が開始されたら、キャンセルボタンを有効にする
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.showsCancelButton = true
+        // 編集開始したら、前回の変換処理時に変更していたボタン状態を戻す
         registerButton.setTitle("リスト登録", for: .normal)
         registerButton.setTitleColor(UIColor.blue, for: .normal)
         registerButton.isEnabled = true
@@ -74,6 +76,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         // 外部からIDを見えないような処理をする
         let app_id = "app_id"
+        // ひらがな化APIでの変換をひらがなに指定
         let output_type = "hiragana"
         // キーボードを閉じる
         view.endEditing(true)
@@ -82,12 +85,16 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
             return
         }
             
+        // リクエスト処理
+        // ひらがな化APIはPOST形式でリクエスト受け付ける
         var request = URLRequest(url: URL(string: "https://labs.goo.ne.jp/api/hiragana")!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
+        // POSTするデータを設定
         let wordData = WordData(app_id: app_id, sentence: inputString, output_type: output_type)
             
+        // POSTするデータのエンコード処理
         guard let uploadData = try? JSONEncoder().encode(wordData) else {
                 print("json生成失敗")
                 return
@@ -96,12 +103,15 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
             
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
             
+        // requestにuploadDataをアップロード
+        // POSTやPUTの場合にはuploadTaskを使用
         let task = session.uploadTask(with: request, from: uploadData) { data, response, error in
             if let error = error {
                 print ("error: \(error)")
                 return
             }
                 
+            // 200番台以外のエラーをserver errorとして処理
             guard let response = response as? HTTPURLResponse,
                 (200...299).contains(response.statusCode) else {
                     print ("server error")
@@ -133,7 +143,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
             self.tableView.reloadData()
                 
             // 引数のwithDurationでアニメーションの処理時間を指定
-            // Buttonなので即表示させる
+            // Buttonは即表示させる
             UIButton.animate(withDuration: 0.0, animations: {
                 // アルファ値を1.0に変化させる(初期値はStoryboardで0.0に設定済み)
                 self.registerButton.alpha = 1.0
@@ -162,7 +172,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // セルにテキストを出力
-        let cell : ConvertRubiTableViewCell = tableView.dequeueReusableCell(withIdentifier: "convertCell", for: indexPath) as! ConvertRubiTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "convertCell", for: indexPath) as! ConvertRubiTableViewCell
         
         // セルに表示する値を設定
         cell.inputCharacter!.text = convertRubiList[indexPath.row].input
@@ -191,8 +201,10 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         // UserDefaultsに保存できるようにタプルの配列を辞書の配列へ変換
         let saveList: [[String: Any]] = registrationList.map { ["input": $0.input,  "output": $0.output] }
 
+        // UserDefaultsに保存できる形式に処理したデータを保存させる
         userDefaults.set(saveList, forKey: "list")
         
+        // 登録したらそのワードを連続で登録させないように処理
         registerButton.setTitle("登録しました", for: .normal)
         registerButton.setTitleColor(UIColor.red, for: .normal)
         registerButton.isEnabled = false
