@@ -40,7 +40,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+                
         // SearchBarのdelegate通知先設定
         searchText.delegate = self
         
@@ -182,10 +182,16 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
      
     @IBAction func tapRegistrationButton(_ sender: Any) {
         
-        // 変換したワードをregistrationListに登録
+        let userDefaults = UserDefaults.standard
+
+        // 変換前後のワードをregistrationListに登録
         let wordSet = (convertRubiList[0])
         registrationList.insert(wordSet, at: 0)
-        print(registrationList)
+        
+        // UserDefaultsに保存できるようにタプルの配列を辞書の配列へ変換
+        let saveList: [[String: Any]] = registrationList.map { ["input": $0.input,  "output": $0.output] }
+
+        userDefaults.set(saveList, forKey: "list")
         
         registerButton.setTitle("登録しました", for: .normal)
         registerButton.setTitleColor(UIColor.red, for: .normal)

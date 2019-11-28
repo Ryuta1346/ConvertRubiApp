@@ -10,11 +10,21 @@ import UIKit
 
 class ListTableViewController: UITableViewController {
     
+    var registrationList : [(input: String, output: String)] = []
+    
     @IBOutlet var tableViewOnList: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // UserDefaultsに保存していた値の読み込み処理
+        let userDefaults = UserDefaults.standard
+        if let loadList = userDefaults.object(forKey: "list") as? [[String: Any]] {
+            // 辞書の配列をタプルの配列へ変換
+            let wordSet = loadList.map { (input: $0["input"] as! String, output: $0["output"] as! String)}
+            registrationList.insert(contentsOf: wordSet, at: 0)
+        }
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
