@@ -50,9 +50,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         
         tableView.dataSource = self
         
-        // TableViewのスクロールをオフに
-        tableView.isScrollEnabled = false
-        
         registerButton.setTitle("リスト登録", for: .normal)
     }
 
@@ -155,7 +152,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
 
     // TableViewにタイトル表示
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "変換履歴(5件)"
+        return "変換履歴"
     }
     
     // セクションの数
