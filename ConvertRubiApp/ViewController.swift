@@ -54,6 +54,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         tableView.isScrollEnabled = false
         
         registerButton.setTitle("リスト登録", for: .normal)
+    
     }
 
     // 編集が開始されたら、キャンセルボタンを有効にする
@@ -74,84 +75,105 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
 
     // サーチバーがクリックされた時の処理
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        // 外部からIDを見えないような処理をする
-        let app_id = "app_id"
-        // ひらがな化APIでの変換をひらがなに指定
-        let output_type = "hiragana"
-        // キーボードを閉じる
-        view.endEditing(true)
         
-        guard let inputString = searchText.text else {
-            return
-        }
-            
-        // リクエスト処理
-        // ひらがな化APIはPOST形式でリクエスト受け付ける
-        var request = URLRequest(url: URL(string: "https://labs.goo.ne.jp/api/hiragana")!)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        // POSTするデータを設定
-        let wordData = WordData(app_id: app_id, sentence: inputString, output_type: output_type)
-            
-        // POSTするデータのエンコード処理
-        guard let uploadData = try? JSONEncoder().encode(wordData) else {
-                print("json生成失敗")
-                return
-            }
-        request.httpBody = uploadData
-            
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-            
-        // requestにuploadDataをアップロード
-        // POSTやPUTの場合にはuploadTaskを使用
-        let task = session.uploadTask(with: request, from: uploadData) { data, response, error in
-            if let error = error {
-                print ("error: \(error)")
-                return
-            }
-                
-            // 200番台以外のエラーをserver errorとして処理
-            guard let response = response as? HTTPURLResponse,
-                (200...299).contains(response.statusCode) else {
-                    print ("server error")
-                    return
-            }
-                
-            guard let data = data, let jsonData = try? JSONDecoder().decode(RubiData.self, from: data) else {
-                print("json変換に失敗しました")
-                return
-            }
-
-            // 変換前のワードの表示
-            self.inputText.text = inputString
-            // 変換後のワードの表示
-            self.rubiText.text = jsonData.converted
-            
-            // 登録データ用の配列に格納するタプルを作成
-            let convertWord = (inputString, jsonData.converted)
-            
-            // 履歴表示を5件に制限
-            if convertRubiList.count < 5 {
-                convertRubiList.insert(convertWord, at: 0)
-            } else {
-                convertRubiList.removeLast()
-                convertRubiList.insert(convertWord, at: 0)
-            }
-                                          
-            // 履歴表示用のTableViewの表示データ更新
-            self.tableView.reloadData()
-                
-            // 引数のwithDurationでアニメーションの処理時間を指定
-            // Buttonは即表示させる
-            UIButton.animate(withDuration: 0.0, animations: {
-                // アルファ値を1.0に変化させる(初期値はStoryboardで0.0に設定済み)
-                self.registerButton.alpha = 1.0
-            })
-        }
+        let urlSessionPostClient = URLSessionPostClient()
+    
+        urlSessionPostClient.postRequest(url: "https://labs.goo.ne.jp/api/hiragana", params: self.searchText.text!)
+        // 変換前のワードの表示
+        self.inputText.text = self.searchText.text
+        // 変換後のワードの表示
+        self.rubiText.text = urlSessionPostClient.convertText
+        // 履歴表示用のTableViewの表示データ更新
+        tableView.reloadData()
         
-        task.resume()
+        // 引数のwithDurationでアニメーションの処理時間を指定
+        // Buttonは即表示させる
+        UIButton.animate(withDuration: 0.0, animations: {
+            // アルファ値を1.0に変化させる(初期値はStoryboardで0.0に設定済み)
+            self.registerButton.alpha = 1.0
+        })
+        
     }
+        
+        
+//        // 外部からIDを見えないような処理をする
+//        let app_id = "app_id"
+//        // ひらがな化APIでの変換をひらがなに指定
+//        let output_type = "hiragana"
+//        // キーボードを閉じる
+//        view.endEditing(true)
+//
+//        guard let inputString = searchText.text else {
+//            return
+//        }
+//
+//        // リクエスト処理
+//        // ひらがな化APIはPOST形式でリクエスト受け付ける
+//        var request = URLRequest(url: URL(string: "https://labs.goo.ne.jp/api/hiragana")!)
+//        request.httpMethod = "POST"
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//
+//        // POSTするデータを設定
+//        let wordData = WordData(app_id: app_id, sentence: inputString, output_type: output_type)
+//
+//        // POSTするデータのエンコード処理
+//        guard let uploadData = try? JSONEncoder().encode(wordData) else {
+//                print("json生成失敗")
+//                return
+//            }
+//        request.httpBody = uploadData
+//
+//        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+//
+//        // requestにuploadDataをアップロード
+//        // POSTやPUTの場合にはuploadTaskを使用
+//        let task = session.uploadTask(with: request, from: uploadData) { data, response, error in
+//            if let error = error {
+//                print ("error: \(error)")
+//                return
+//            }
+//
+//            // 200番台以外のエラーをserver errorとして処理
+//            guard let response = response as? HTTPURLResponse,
+//                (200...299).contains(response.statusCode) else {
+//                    print ("server error")
+//                    return
+//            }
+//
+//            guard let data = data, let jsonData = try? JSONDecoder().decode(RubiData.self, from: data) else {
+//                print("json変換に失敗しました")
+//                return
+//            }
+//
+//            // 変換前のワードの表示
+//            self.inputText.text = inputString
+//            // 変換後のワードの表示
+//            self.rubiText.text = jsonData.converted
+//
+//            // 登録データ用の配列に格納するタプルを作成
+//            let convertWord = (inputString, jsonData.converted)
+//
+//            // 履歴表示を5件に制限
+//            if convertRubiList.count < 5 {
+//                convertRubiList.insert(convertWord, at: 0)
+//            } else {
+//                convertRubiList.removeLast()
+//                convertRubiList.insert(convertWord, at: 0)
+//            }
+//
+//            // 履歴表示用のTableViewの表示データ更新
+//            self.tableView.reloadData()
+//
+//            // 引数のwithDurationでアニメーションの処理時間を指定
+//            // Buttonは即表示させる
+//            UIButton.animate(withDuration: 0.0, animations: {
+//                // アルファ値を1.0に変化させる(初期値はStoryboardで0.0に設定済み)
+//                self.registerButton.alpha = 1.0
+//            })
+//        }
+//
+//        task.resume()
+
 
     // TableViewにタイトル表示
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

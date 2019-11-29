@@ -16,6 +16,7 @@
 		32E43102238AD47D004710D9 /* ConvertRubiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E43101238AD47D004710D9 /* ConvertRubiTableViewCell.swift */; };
 		32E43104238D5B4A004710D9 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E43103238D5B4A004710D9 /* ListTableViewController.swift */; };
 		32E4310C238D8996004710D9 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E4310B238D8996004710D9 /* ListTableViewCell.swift */; };
+		32E4310E2391149E004710D9 /* UrlSessionPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E4310D2391149E004710D9 /* UrlSessionPost.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		32E43101238AD47D004710D9 /* ConvertRubiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertRubiTableViewCell.swift; sourceTree = "<group>"; };
 		32E43103238D5B4A004710D9 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
 		32E4310B238D8996004710D9 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		32E4310D2391149E004710D9 /* UrlSessionPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSessionPost.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				32E4310B238D8996004710D9 /* ListTableViewCell.swift */,
 				32E43101238AD47D004710D9 /* ConvertRubiTableViewCell.swift */,
 				32E430ED23885A30004710D9 /* Main.storyboard */,
+				32E4310D2391149E004710D9 /* UrlSessionPost.swift */,
 				32E430F023885A30004710D9 /* Assets.xcassets */,
 				32E430F223885A30004710D9 /* LaunchScreen.storyboard */,
 				32E430F523885A30004710D9 /* Info.plist */,
@@ -149,6 +152,7 @@
 			files = (
 				32E430EC23885A30004710D9 /* ViewController.swift in Sources */,
 				32E430E823885A30004710D9 /* AppDelegate.swift in Sources */,
+				32E4310E2391149E004710D9 /* UrlSessionPost.swift in Sources */,
 				32E430EA23885A30004710D9 /* SceneDelegate.swift in Sources */,
 				32E43104238D5B4A004710D9 /* ListTableViewController.swift in Sources */,
 				32E43102238AD47D004710D9 /* ConvertRubiTableViewCell.swift in Sources */,
