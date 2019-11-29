@@ -11,8 +11,8 @@ import Foundation
 
 class URLSessionPostClient {
     
-//    var inputText: String!
-//    var convertText: String!
+    var inputText: String!
+    var convertText: String!
 
  
     struct ConvertData: Codable {
@@ -27,8 +27,6 @@ class URLSessionPostClient {
     }
     
     func postRequest(url: String, params: String) {
-        let inputText: String
-        let convertText: String
         
         // 外部からIDを見えないような処理をする
         let app_id = "ec67dde58dfd8c870f1d20f38c988d9f5428f51a69d2663ca28f0822b67b0c03"
@@ -74,8 +72,8 @@ class URLSessionPostClient {
                 return
             }
             
-            let inputText = inputString
-            let convertText = jsonData.converted
+            self.inputText = inputString
+            self.convertText = jsonData.converted
 
 //            // 変換前のワードの表示
 //            self.inputText.text = inputString
